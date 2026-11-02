@@ -104,7 +104,7 @@ if [ -d "$TARGET_DIR" ]; then
         Run 'bashedit' for quick ~/.bashrc access
         Run 'plasmarestart' to restart Plasmashell in Case of Hangups / Crashes (May close Running Programs!) \n
     To Uninstall this Package, Run 'uninstall-system-diagnostics' \n
-    Please Reload your Shell or run 'source ~/.bashrc' for all Changes to take Effect
+    Please reload your Shell or run 'source ~/.bashrc' for all Changes to take Effect
     "
     else
         echo "The Package was not Installed Successfully"
