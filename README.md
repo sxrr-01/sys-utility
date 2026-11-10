@@ -28,6 +28,7 @@
    whatpower
    ```
    Experimental, Only Tested on Lenovo Yoga X1 Gen 3
+   
 * **Run 'bashedit' for quick ~/.bashrc access**
    ```bash
    bashedit
@@ -36,10 +37,12 @@
    ```bash
    plasmarestart
    ```
-* **Run 'setpower' to choose between Performance (1) and Power Save (0) (Experimental, Intel CPUs Only for Now)**
+* **Run 'setpower' to choose between Performance (1) and Power Save (0)**
    ```bash
    setpower
    ```
+   Experimental, Intel CPUs Only for Now
+   
 * **Run 'uninstall-system-diagnostics' to Uninstall this Package**
    ```bash
    uninstall-system-diagnostics
