@@ -61,7 +61,7 @@ wattage2=$(( (voltage_now * current_now) / 1000000000000 ))
 echo "Voltage: ${voltage_now2}V Current: ${current_now2}A Wattage: ${wattage2}W"
 EOF
 
-cat << 'EOF' >> ~/sys-utility/unins_sysdiag.sh
+cat << 'EOF' >> ~/sys-utility/unins-sysutil.sh
 read -p "Do you want to Uninstall system-utility? [Y/n] " -n 1 -r </dev/tty
 echo
 
