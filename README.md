@@ -1,7 +1,7 @@
-# System-Diagnostics
+# System-Utility
 
-# What is system-diagnostics?
-* **Quick System Diagnostic Commands for systemd based Linux Systems**
+# What is sys-utility?
+* **Quick System Diagnostic & Utility Commands for systemd based Linux Systems**
 * **works with bash**
 * **Easy Install and Uninstall**
 
@@ -9,7 +9,7 @@
 
 1. **Get & Execute Install Script (Paste into your Bash Shell)**
    ```bash
-   curl -fsSL https://raw.githubusercontent.com/sxrr-01/sysdiagnose/main/system-diagnostics_setup.sh | bash
+   curl -fsSL https://raw.githubusercontent.com/sxrr-01/sys-utility/main/system-diagnostics_setup.sh | bash
    ```
 2. **Follow the singular install Prompt & Read the Instructions**
 
