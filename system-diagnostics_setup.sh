@@ -137,7 +137,7 @@ chmod +x ~/sys-utility/setpower.sh
 echo "alias system-diagnostics='~/sys-utility/system-diagnostics.sh'" >> ~/.bashrc
 echo "alias whatpower='~/sys-utility/power.sh'" >> ~/.bashrc
 echo "alias bashedit='nano ~/.bashrc'" >> ~/.bashrc
-echo "alias uninstall-sys-utility='~/sys-utility/unins-sysdiag.sh'" >> ~/.bashrc
+echo "alias uninstall-sys-utility='~/sys-utility/unins-sysutil.sh'" >> ~/.bashrc
 echo "alias plasmarestart='~/sys-utility/plasmarestart.sh'" >> ~/.bashrc
 echo "alias setpower='~/sys-utility/setpower.sh'" >> ~/.bashrc
 source ~/.bashrc
