@@ -37,7 +37,7 @@
    ```bash
    plasmarestart
    ```
-* **Run 'setpower' to choose between Performance (1) and Power Save (0)**
+* **Run 'setpower' to choose between Performance (1) and Power Save (0). Requires sudo**
    ```bash
    setpower
    ```
