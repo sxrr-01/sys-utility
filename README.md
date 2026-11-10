@@ -23,10 +23,11 @@
    ```bash
    system-diagnostics
    ```
-* **Run 'whatpower' to get current Input Voltage, Current and Wattage (Experimental, Only Tested on Lenovo Yoga X1 Gen 3)**
+* **Run 'whatpower' to get current Input Voltage, Current and Wattage**
    ```bash
    whatpower
    ```
+   Experimental, Only Tested on Lenovo Yoga X1 Gen 3
 * **Run 'bashedit' for quick ~/.bashrc access**
    ```bash
    bashedit
