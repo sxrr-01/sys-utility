@@ -33,7 +33,7 @@ fi
 mkdir ~/sys-utility
 touch ~/sys-utility/system-diagnostics.sh
 touch ~/sys-utility/power.sh
-touch ~/sys-utility/unins_sysutil.sh
+touch ~/sys-utility/unins-sysutil.sh
 touch ~/sys-utility/plasmarestart.sh
 touch ~/sys-utility/setpower.sh
 
@@ -130,14 +130,14 @@ EOF
 
 chmod +x ~/sys-utility/system-diagnostics.sh
 chmod +x ~/sys-utility/power.sh
-chmod +x ~/sys-utility/unins_sysutil.sh
+chmod +x ~/sys-utility/unins-sysutil.sh
 chmod +x ~/sys-utility/plasmarestart.sh
 chmod +x ~/sys-utility/setpower.sh
 
 echo "alias system-diagnostics='~/sys-utility/system-diagnostics.sh'" >> ~/.bashrc
 echo "alias whatpower='~/sys-utility/power.sh'" >> ~/.bashrc
 echo "alias bashedit='nano ~/.bashrc'" >> ~/.bashrc
-echo "alias uninstall-sys-utility='~/sys-utility/unins_sysdiag.sh'" >> ~/.bashrc
+echo "alias uninstall-sys-utility='~/sys-utility/unins-sysdiag.sh'" >> ~/.bashrc
 echo "alias plasmarestart='~/sys-utility/plasmarestart.sh'" >> ~/.bashrc
 echo "alias setpower='~/sys-utility/setpower.sh'" >> ~/.bashrc
 source ~/.bashrc
