@@ -19,11 +19,11 @@
 
 **All of these Instructions can be found in the Post-Install Prompt**
 
-* **Run 'system-diagnostics' to Run a quick Boot Time & Storage Overview. Output will be written to: ~/system-diagnostics/an-out.txt**
+* **Run 'system-diagnostics' to Run a quick Boot Time & Storage Overview. Output will be written to: ~/sys-utility/an-out.txt**
    ```bash
    system-diagnostics
    ```
-* **Run 'whatpower' to get current Input Voltage, Current and Wattage (Experimental)**
+* **Run 'whatpower' to get current Input Voltage, Current and Wattage (Experimental, Only Tested on Lenovo Yoga X1 Gen 3)**
    ```bash
    whatpower
    ```
@@ -35,7 +35,7 @@
    ```bash
    plasmarestart
    ```
-* **Run 'setpower' to choose between Performance (1) and Power Save (0)**
+* **Run 'setpower' to choose between Performance (1) and Power Save (0) (Experimental, Intel CPUs Only for Now)**
    ```bash
    setpower
    ```
