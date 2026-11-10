@@ -45,7 +45,7 @@
    
 * **Run 'uninstall-system-diagnostics' to Uninstall this Package**
    ```bash
-   uninstall-system-diagnostics
+   uninstall-sys-utility
    ```
 
 ## That's It!
