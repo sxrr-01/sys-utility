@@ -43,7 +43,7 @@
    ```
    Experimental, Intel CPUs Only for Now
    
-* **Run 'uninstall-system-diagnostics' to Uninstall this Package**
+* **Run 'uninstall-sys-utility' to Uninstall this Package**
    ```bash
    uninstall-sys-utility
    ```
