@@ -35,6 +35,10 @@
    ```bash
    plasmarestart
    ```
+* **Run 'setpower' to choose between Performance (1) and Power Save (0)**
+   ```bash
+   setpower
+   ```
 * **Run 'uninstall-system-diagnostics' to Uninstall this Package**
    ```bash
    uninstall-system-diagnostics

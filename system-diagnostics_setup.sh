@@ -35,6 +35,7 @@ touch ~/sys-utility/system-diagnostics.sh
 touch ~/sys-utility/power.sh
 touch ~/sys-utility/unins_sysutil.sh
 touch ~/sys-utility/plasmarestart.sh
+touch ~/sys-utility/setpower.sh
 
 cat << 'EOF' >> ~/sys-utility/system-diagnostics.sh
 echo "[Storage]" > ~/sys-utility/an-out.txt
@@ -81,16 +82,64 @@ cat << 'EOF' >> ~/sys-utility/plasmarestart.sh
 plasmashell --replace > /dev/null & disown
 EOF
 
+cat << 'EOF' >> ~/sys-utility/setpower.sh
+read -p "Select Power State (1/0): " choice
+
+case "$choice" in
+  [1]* )
+    for cpu in /sys/devices/system/cpu/cpu[1-7]/online; do
+        [ -f "$cpu" ] && echo 1 | sudo tee "$cpu" >/dev/null
+    done
+    echo "0" | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo >/dev/null
+    for dev in /sys/bus/pci/devices/*/power/control; do
+        echo "on" | sudo tee "$dev" >/dev/null 2>&1
+    done
+    #echo "0" | sudo tee /sys/module/i915/parameters/enable_rc6
+    for usb in /sys/bus/usb/devices/*/power/control; do
+        echo "on" | sudo tee "$usb" >/dev/null 2>&1
+    done
+    echo "0" | sudo tee /sys/module/snd_hda_intel/parameters/power_save >/dev/null 2>&1
+    echo "N" | sudo tee /sys/module/snd_hda_intel/parameters/power_save_controller >/dev/null
+    sudo iw dev wlp2s0 set power_save off 2>/dev/null || true
+    echo "1060" | sudo tee /sys/class/backlight/intel_backlight/brightness >/dev/null
+    echo "Performance"
+    ;;
+  [0]* )
+    for cpu in /sys/devices/system/cpu/cpu[1-7]/online; do
+        [ -f "$cpu" ] && echo 0 | sudo tee "$cpu" >/dev/null
+    done
+    echo "1" | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo >/dev/null
+    for dev in /sys/bus/pci/devices/*/power/control; do
+        echo "auto" | sudo tee "$dev" >/dev/null 2>&1
+    done
+    #echo "1" | sudo tee /sys/module/i915/parameters/enable_rc6
+    for usb in /sys/bus/usb/devices/*/power/control; do
+        echo "auto" | sudo tee "$usb" >/dev/null 2>&1
+    done
+    echo "1" | sudo tee /sys/module/snd_hda_intel/parameters/power_save >/dev/null 2>&1
+    echo "Y" | sudo tee /sys/module/snd_hda_intel/parameters/power_save_controller >/dev/null
+    sudo iw dev wlp2s0 set power_save on 2>/dev/null || true
+    echo "1" | sudo tee /sys/class/backlight/intel_backlight/brightness >/dev/null
+    echo "Powersave"
+    ;;
+  * )
+    echo "Invalid input. Please enter 1 or 0."
+    ;;
+esac
+EOF
+
 chmod +x ~/sys-utility/system-diagnostics.sh
 chmod +x ~/sys-utility/power.sh
 chmod +x ~/sys-utility/unins_sysutil.sh
 chmod +x ~/sys-utility/plasmarestart.sh
+chmod +x ~/sys-utility/setpower.sh
 
 echo "alias system-diagnostics='~/sys-utility/system-diagnostics.sh'" >> ~/.bashrc
 echo "alias whatpower='~/sys-utility/power.sh'" >> ~/.bashrc
 echo "alias bashedit='nano ~/.bashrc'" >> ~/.bashrc
 echo "alias uninstall-sys-utility='~/sys-utility/unins_sysdiag.sh'" >> ~/.bashrc
 echo "alias plasmarestart='~/sys-utility/plasmarestart.sh'" >> ~/.bashrc
+echo "alias setpower='~/sys-utility/setpower.sh'" >> ~/.bashrc
 source ~/.bashrc
 
 TARGET_DIR="$HOME/sys-utility"
@@ -103,7 +152,7 @@ if [ -d "$TARGET_DIR" ]; then
         Run 'whatpower' to get current Input Voltage, Current and Wattage
         Run 'bashedit' for quick ~/.bashrc access
         Run 'plasmarestart' to restart Plasmashell in Case of Hangups / Crashes (May close Running Programs!)
-        Run 'setpower' to choose between Performance (1) and Power Save (0) \n
+        Run 'setpower' to choose between Performance (1) and Power Save (0)\n
     To Uninstall this Package, Run 'uninstall-sys-utility' \n
     Please reload your Shell or run 'source ~/.bashrc' for all Changes to take Effect
     "
