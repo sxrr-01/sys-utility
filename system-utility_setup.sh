@@ -83,49 +83,60 @@ plasmashell --replace > /dev/null & disown
 EOF
 
 cat << 'EOF' >> ~/sys-utility/setpower.sh
-read -p "Select Power State (1/0): " choice
+mode="default"
 
-case "$choice" in
-  [1]* )
-    for cpu in /sys/devices/system/cpu/cpu[1-7]/online; do
-        [ -f "$cpu" ] && echo 1 | sudo tee "$cpu" >/dev/null
-    done
-    echo "0" | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo >/dev/null
-    for dev in /sys/bus/pci/devices/*/power/control; do
-        echo "on" | sudo tee "$dev" >/dev/null 2>&1
-    done
-    #echo "0" | sudo tee /sys/module/i915/parameters/enable_rc6
-    for usb in /sys/bus/usb/devices/*/power/control; do
-        echo "on" | sudo tee "$usb" >/dev/null 2>&1
-    done
-    echo "0" | sudo tee /sys/module/snd_hda_intel/parameters/power_save >/dev/null 2>&1
-    echo "N" | sudo tee /sys/module/snd_hda_intel/parameters/power_save_controller >/dev/null
-    sudo iw dev wlp2s0 set power_save off 2>/dev/null || true
-    echo "1060" | sudo tee /sys/class/backlight/intel_backlight/brightness >/dev/null
-    echo "Performance"
-    ;;
-  [0]* )
-    for cpu in /sys/devices/system/cpu/cpu[1-7]/online; do
-        [ -f "$cpu" ] && echo 0 | sudo tee "$cpu" >/dev/null
-    done
-    echo "1" | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo >/dev/null
-    for dev in /sys/bus/pci/devices/*/power/control; do
-        echo "auto" | sudo tee "$dev" >/dev/null 2>&1
-    done
-    #echo "1" | sudo tee /sys/module/i915/parameters/enable_rc6
-    for usb in /sys/bus/usb/devices/*/power/control; do
-        echo "auto" | sudo tee "$usb" >/dev/null 2>&1
-    done
-    echo "1" | sudo tee /sys/module/snd_hda_intel/parameters/power_save >/dev/null 2>&1
-    echo "Y" | sudo tee /sys/module/snd_hda_intel/parameters/power_save_controller >/dev/null
-    sudo iw dev wlp2s0 set power_save on 2>/dev/null || true
-    echo "1" | sudo tee /sys/class/backlight/intel_backlight/brightness >/dev/null
-    echo "Powersave"
-    ;;
-  * )
-    echo "Invalid input. Please enter 1 or 0."
-    ;;
-esac
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -1)
+            mode="one"
+            for cpu in /sys/devices/system/cpu/cpu[1-7]/online; do
+              [ -f "$cpu" ] && echo 1 | sudo tee "$cpu" >/dev/null
+            done
+            echo "0" | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo >/dev/null
+            for dev in /sys/bus/pci/devices/*/power/control; do
+              echo "on" | sudo tee "$dev" >/dev/null 2>&1
+            done
+            #echo "0" | sudo tee /sys/module/i915/parameters/enable_rc6
+            for usb in /sys/bus/usb/devices/*/power/control; do
+              echo "on" | sudo tee "$usb" >/dev/null 2>&1
+            done
+            echo "0" | sudo tee /sys/module/snd_hda_intel/parameters/power_save >/dev/null 2>&1
+            echo "N" | sudo tee /sys/module/snd_hda_intel/parameters/power_save_controller >/dev/null
+            sudo iw dev wlp2s0 set power_save off 2>/dev/null || true
+            echo "1060" | sudo tee /sys/class/backlight/intel_backlight/brightness >/dev/null
+            echo "Performance"
+            shift
+            ;;
+        -0)
+            mode="zero"
+            for cpu in /sys/devices/system/cpu/cpu[1-7]/online; do
+              [ -f "$cpu" ] && echo 0 | sudo tee "$cpu" >/dev/null
+            done
+            echo "1" | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo >/dev/null
+            for dev in /sys/bus/pci/devices/*/power/control; do
+              echo "auto" | sudo tee "$dev" >/dev/null 2>&1
+            done
+            #echo "1" | sudo tee /sys/module/i915/parameters/enable_rc6
+            for usb in /sys/bus/usb/devices/*/power/control; do
+              echo "auto" | sudo tee "$usb" >/dev/null 2>&1
+            done
+            echo "1" | sudo tee /sys/module/snd_hda_intel/parameters/power_save >/dev/null 2>&1
+            echo "Y" | sudo tee /sys/module/snd_hda_intel/parameters/power_save_controller >/dev/null
+            sudo iw dev wlp2s0 set power_save on 2>/dev/null || true
+            echo "1" | sudo tee /sys/class/backlight/intel_backlight/brightness >/dev/null
+            echo "Powersave"
+            shift
+            ;;
+        -h|--help)
+            echo "Arguments: $0 [-1|-0]"
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+    esac
+done
 EOF
 
 chmod +x ~/sys-utility/system-diagnostics.sh
